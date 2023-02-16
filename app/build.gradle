@@ -39,6 +39,11 @@ android {
 //        testApplicationId "com.securedemo.myapplication"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    dataBinding {
+        enabled true
     }
 
     buildTypes {
@@ -63,7 +68,7 @@ android {
 }
 
 dependencies {
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
@@ -91,17 +96,6 @@ dependencies {
 
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId = 'com.github.RajSahajanand'
-            artifactId = 'library'
-            version = '1.0'
-
-//            from components.java
-        }
-    }
-}
 
 //task CaptureLibraryVersion {
 //    def libDef = project.configurations.getByName('implementation').allDependencies.matching {
