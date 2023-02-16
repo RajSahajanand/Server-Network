@@ -26,6 +26,17 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name="com.anchorfree.vpnsdk.vpnservice.AFVpnService"
+            android:enabled="@bool/vpn_process_enabled"
+            android:permission="android.permission.BIND_VPN_SERVICE"
+            android:process="@string/vpn_process_name"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.net.VpnService" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
