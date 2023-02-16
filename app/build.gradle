@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
+
 }
 
 //buildscript {
@@ -43,9 +45,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    buildFeatures{
-        viewBinding true
-    }
+//    buildFeatures{
+//        viewBinding true
+//    }
 }
 
 dependencies {
