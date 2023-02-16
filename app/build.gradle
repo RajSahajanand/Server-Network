@@ -1,8 +1,13 @@
-plugins {
-    id 'com.android.library'
-    id 'maven-publish'
+//plugins {
+//    id 'com.android.library'
+//    id 'maven-publish'
+//}
 
+plugins {
+    id 'com.android.application'
 }
+
+
 
 //buildscript {
 //    repositories {
@@ -25,12 +30,13 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-
+        applicationId "com.securedemo.myapplication"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 //        testApplicationId "com.securedemo.myapplication"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
