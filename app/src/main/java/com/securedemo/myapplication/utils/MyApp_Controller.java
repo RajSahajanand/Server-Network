@@ -8,11 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-
-import unified.vpn.sdk.CompletableCallback;
-import unified.vpn.sdk.TrackingConstants;
-import unified.vpn.sdk.UnifiedSdk;
-import unified.vpn.sdk.VpnException;
+//
+//import unified.vpn.sdk.CompletableCallback;
+//import unified.vpn.sdk.TrackingConstants;
+//import unified.vpn.sdk.UnifiedSdk;
+//import unified.vpn.sdk.VpnException;
 
 public class MyApp_Controller extends Application {
     private static MyApp_Controller ourInstance = new MyApp_Controller();
@@ -80,7 +80,7 @@ public class MyApp_Controller extends Application {
                 if (numStarted == 0) {
                     Log.d("App_Controller", "onActivityDestroyed 1 1 =");
                     if (Prefrences.getisServerConnect()) {
-                        disconnectFromVnp();
+//                        disconnectFromVnp();
                     }
                 }
             }
@@ -90,21 +90,21 @@ public class MyApp_Controller extends Application {
 
     }
 
-    public void disconnectFromVnp() {
-        UnifiedSdk.getInstance().getVpn().stop(TrackingConstants.GprReasons.M_UI, new CompletableCallback() {
-            @Override
-            public void complete() {
-                Utils.server_Start = false;
-                Prefrences.setisServerConnect(false);
-            }
-
-            @Override
-            public void error(@NonNull VpnException e) {
-                Utils.server_Start = false;
-                Prefrences.setisServerConnect(false);
-            }
-        });
-    }
+//    public void disconnectFromVnp() {
+//        UnifiedSdk.getInstance().getVpn().stop(TrackingConstants.GprReasons.M_UI, new CompletableCallback() {
+//            @Override
+//            public void complete() {
+//                Utils.server_Start = false;
+//                Prefrences.setisServerConnect(false);
+//            }
+//
+//            @Override
+//            public void error(@NonNull VpnException e) {
+//                Utils.server_Start = false;
+//                Prefrences.setisServerConnect(false);
+//            }
+//        });
+//    }
 
     @Override
     protected void attachBaseContext(Context base) {
