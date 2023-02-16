@@ -6,7 +6,6 @@
 
 plugins {
     id 'com.android.application'
-    id 'maven-publish'
 }
 
 
@@ -32,7 +31,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-//        applicationId "com.securedemo.myapplication"
+        applicationId "com.securedemo.myapplication"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
