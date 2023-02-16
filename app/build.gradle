@@ -1,11 +1,11 @@
-//plugins {
-//    id 'com.android.library'
-//    id 'maven-publish'
-//}
-
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
+    id 'maven-publish'
 }
+
+//plugins {
+//    id 'com.android.application'
+//}
 
 
 
@@ -30,7 +30,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.securedemo.myapplication"
+//        applicationId "com.securedemo.myapplication"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
