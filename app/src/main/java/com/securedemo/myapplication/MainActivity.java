@@ -1,5 +1,6 @@
 package com.securedemo.myapplication;
 
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -45,7 +46,7 @@ import unified.vpn.sdk.User;
 import unified.vpn.sdk.VpnException;
 import unified.vpn.sdk.VpnState;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private static final String CHANNEL_ID = "Server_Master";
     UnifiedSdk unifiedSDK;

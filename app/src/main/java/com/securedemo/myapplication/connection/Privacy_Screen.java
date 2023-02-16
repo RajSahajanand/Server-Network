@@ -1,27 +1,25 @@
 package com.securedemo.myapplication.connection;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.securedemo.myapplication.R;
 import com.securedemo.myapplication.Start_Activity;
 import com.securedemo.myapplication.utils.Prefrences;
 import com.securedemo.myapplication.utils.Utils;
 
-public class Privacy_Policy_Screen extends AppCompatActivity {
-    
+public class Privacy_Screen extends Activity {
+
     TextView textView;
+    boolean exit_flag = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,8 +28,8 @@ public class Privacy_Policy_Screen extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.txt_privacy);
         TextView next = (TextView) findViewById(R.id.next);
-        
-        Utils.isConnectingToInternet(Privacy_Policy_Screen.this, new Utils.OnCheckNet() {
+
+        Utils.isConnectingToInternet(Privacy_Screen.this, new Utils.OnCheckNet() {
             @Override
             public void OnCheckNet(boolean b) {
                 if (b) {
@@ -45,7 +43,7 @@ public class Privacy_Policy_Screen extends AppCompatActivity {
                             }
 
                         } else {
-                            Toast.makeText(Privacy_Policy_Screen.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Privacy_Screen.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
                     } catch (NullPointerException n) {
                         n.printStackTrace();
@@ -61,14 +59,11 @@ public class Privacy_Policy_Screen extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Privacy_Policy_Screen.this, Start_Activity.class));
+                startActivity(new Intent(Privacy_Screen.this, Start_Activity.class));
                 finish();
             }
         });
     }
-
-
-    boolean exit_flag = false;
 
     @Override
     public void onBackPressed() {

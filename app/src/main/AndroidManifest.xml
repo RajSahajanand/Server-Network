@@ -16,7 +16,7 @@
         android:theme="@style/Theme.MyVpnDemoRG">
 
         <activity android:name=".connection.Sample_Connection"/>
-        <activity android:name=".connection.Privacy_Policy_Screen"/>
+        <activity android:name=".connection.Privacy_Screen"/>
         <activity android:name=".Start_Activity"/>
         <activity android:name=".MainActivity"
             android:exported="true">

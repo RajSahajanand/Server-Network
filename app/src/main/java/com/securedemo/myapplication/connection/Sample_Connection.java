@@ -1,11 +1,11 @@
 package com.securedemo.myapplication.connection;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.VpnService;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,7 +44,7 @@ import unified.vpn.sdk.TrafficRule;
 import unified.vpn.sdk.UnifiedSdk;
 import unified.vpn.sdk.VpnException;
 
-public class Sample_Connection extends AppCompatActivity {
+public class Sample_Connection extends Activity {
 
     LinearLayout lnr_server_connect;
     ImageView iv_connection, iv_server_flag;
@@ -217,7 +217,7 @@ public class Sample_Connection extends AppCompatActivity {
 
             Prefrences.setisServerConnect(true);
 
-            startActivity(new Intent(Sample_Connection.this, Privacy_Policy_Screen.class));
+            startActivity(new Intent(Sample_Connection.this, Privacy_Screen.class));
             finish();
 
             txt_server_status.setText(getResources().getString(R.string.switch_off));
@@ -270,7 +270,7 @@ public class Sample_Connection extends AppCompatActivity {
                         public void error(@NonNull VpnException e) {
                             setStatus("DISCONNECTED");
                             if (e.getMessage().contains("TRAFFIC_EXCEED")) {
-                                startActivity(new Intent(Sample_Connection.this, Privacy_Policy_Screen.class));
+                                startActivity(new Intent(Sample_Connection.this, Privacy_Screen.class));
                             } else if (e.getMessage().contains("Wrong state to call start")) {
                                 Toast.makeText(Sample_Connection.this, "try again!", Toast.LENGTH_SHORT).show();
                                 disconnectFromVnp(true);
