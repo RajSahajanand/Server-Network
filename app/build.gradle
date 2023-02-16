@@ -1,12 +1,12 @@
-plugins {
-    id 'com.android.library'
-    id 'maven-publish'
-
-}
-
 //plugins {
-//    id 'com.android.application'
+//    id 'com.android.library'
+//    id 'maven-publish'
+//
 //}
+
+plugins {
+    id 'com.android.application'
+}
 
 
 
@@ -40,10 +40,6 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-    }
-
-    dataBinding {
-        enabled true
     }
 
     buildTypes {
