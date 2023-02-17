@@ -13,9 +13,6 @@ import java.util.Random;
 
 public class Utils {
 
-
-
-
     public static List<CountryList> country_List = null;
     public static void setUpCountry() {
         Utils.country_List = Prefrences.getCountry_list();
