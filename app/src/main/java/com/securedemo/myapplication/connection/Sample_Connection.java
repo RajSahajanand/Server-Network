@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.anchorfree.partner.api.response.RemainingTraffic;
 import com.anchorfree.reporting.TrackingConstants;
@@ -27,6 +26,7 @@ import com.anchorfree.vpnsdk.transporthydra.HydraTransport;
 import com.bumptech.glide.Glide;
 import com.northghost.caketube.CaketubeTransport;
 import com.securedemo.myapplication.R;
+import com.securedemo.myapplication.utils.Parameter_Class;
 import com.securedemo.myapplication.utils.Prefrences;
 import com.securedemo.myapplication.utils.Server_Interface;
 import com.securedemo.myapplication.utils.TraficLimitResponse;
@@ -172,7 +172,7 @@ public class Sample_Connection extends Activity {
     }
 
     private void prepareVpn() {
-        if (!Utils.server_Start) {
+        if (!Parameter_Class.server_Start) {
             Utils.isConnectingToInternet(Sample_Connection.this, new Utils.OnCheckNet() {
                 @Override
                 public void OnCheckNet(boolean b) {
@@ -203,7 +203,7 @@ public class Sample_Connection extends Activity {
 
     public void status(String status) {
         if (status.equals("connect")) {
-            Utils.server_Start = false;
+            Parameter_Class.server_Start = false;
             Prefrences.setisServerConnect(false);
             txt_server_status.setText(getResources().getString(R.string.switch_on));
             mk_server_loader.setVisibility(View.GONE);
@@ -235,12 +235,12 @@ public class Sample_Connection extends Activity {
         }
     }
 
-    public void isLoggedIn( com.anchorfree.vpnsdk.callbacks.Callback<Boolean> callback) {
+    public void isLoggedIn(com.anchorfree.vpnsdk.callbacks.Callback<Boolean> callback) {
         UnifiedSDK.getInstance().getBackend().isLoggedIn(callback);
     }
 
     public void connectToVpn() {
-        isLoggedIn(new  com.anchorfree.vpnsdk.callbacks.Callback<Boolean>() {
+        isLoggedIn(new com.anchorfree.vpnsdk.callbacks.Callback<Boolean>() {
             @Override
             public void success(@NonNull Boolean aBoolean) {
                 if (aBoolean) {
@@ -291,7 +291,7 @@ public class Sample_Connection extends Activity {
             @Override
             public void complete() {
                 status("connect");
-                Utils.server_Start = false;
+                Parameter_Class.server_Start = false;
                 Prefrences.setisServerConnect(false);
             }
 
@@ -307,10 +307,10 @@ public class Sample_Connection extends Activity {
             switch (connectionState) {
                 case "DISCONNECTED":
                     status("connect");
-                    Utils.server_Start = false;
+                    Parameter_Class.server_Start = false;
                     break;
                 case "CONNECTED":
-                    Utils.server_Start = true;
+                    Parameter_Class.server_Start = true;
                     status("connected");
                     break;
                 case "WAIT":
@@ -412,8 +412,6 @@ public class Sample_Connection extends Activity {
 
     @Override
     public void onResume() {
-
-
         Glide.with(Sample_Connection.this).load(Prefrences.getServer_image()).error(R.mipmap.ic_launcher).placeholder(R.mipmap.ic_launcher).into(iv_server_flag);
         tv_server_country.setText(Prefrences.getserver_name());
 

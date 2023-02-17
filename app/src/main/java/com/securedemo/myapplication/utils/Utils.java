@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class Utils {
 
-    public static boolean server_Start = false;
+
 
 
     public static List<CountryList> country_List = null;

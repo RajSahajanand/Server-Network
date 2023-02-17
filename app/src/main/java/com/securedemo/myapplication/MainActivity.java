@@ -20,7 +20,6 @@ import com.anchorfree.sdk.NotificationConfig;
 import com.anchorfree.sdk.SessionConfig;
 import com.anchorfree.sdk.TransportConfig;
 import com.anchorfree.sdk.UnifiedSDK;
-
 import com.anchorfree.sdk.rules.TrafficRule;
 import com.anchorfree.vpnsdk.callbacks.CompletableCallback;
 import com.anchorfree.vpnsdk.exceptions.VpnException;
@@ -29,7 +28,8 @@ import com.anchorfree.vpnsdk.vpnservice.VPNState;
 import com.northghost.caketube.CaketubeTransport;
 import com.northghost.caketube.OpenVpnTransportConfig;
 import com.securedemo.myapplication.connection.Sample_Connection;
-import com.securedemo.myapplication.utils.CountryList;
+import com.securedemo.myapplication.utils.Intent_Pass_interface;
+import com.securedemo.myapplication.utils.Parameter_Class;
 import com.securedemo.myapplication.utils.Prefrences;
 import com.securedemo.myapplication.utils.Server_Interface;
 import com.securedemo.myapplication.utils.TraficLimitResponse;
@@ -38,10 +38,8 @@ import com.securedemo.myapplication.utils.Utils;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import retrofit2.Call;
-
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -51,51 +49,45 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends Activity {
 
     private static final String CHANNEL_ID = "Server_Master";
-    UnifiedSDK unifiedSDK;
-    String Server_Key = "";
-    String Server_Password = "";
-    List<String> unknown_url_list = new ArrayList<>();
-    ArrayList<CountryList> countryLists =  new ArrayList<>();
+    public static Intent_Pass_interface intent_pass_interface1;
+    public static Activity context;
+    static UnifiedSDK unifiedSDK;
+    static String Server_Key = "";
+    static String Server_Password = "";
 
+    public static void checkkthis(Activity context1, Intent_Pass_interface intent_pass_interface, boolean... doShowAds) {
+        intent_pass_interface1 = intent_pass_interface;
+        context = context1;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        unknown_url_list.add("https://d2isj403unfbyl.cloudfront.net");
-        unknown_url_list.add("https://backend.northghost.com");
-        unknown_url_list.add("https://api-stage.northghost.com");
-        unknown_url_list.add("https://api-prod.northghost.com");
-        unknown_url_list.add("https://api-dev.northghost.com");
-        unknown_url_list.add("https://developer.aura.com");
-
-        CountryList countryList =  new CountryList();
-        countryList.setName("United States");
-        countryList.setCode("US");
-        countryList.setCuntryimages("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.in%2FGeneric-American-Large-Banner-3FT-13008750MG%2Fdp%2FB019Q0VVNO&psig=AOvVaw24Bb9v8opS7vtKyN6o9H53&ust=1676542686286000&source=images&cd=vfe&ved=2ahUKEwj837Orppf9AhWyQGwGHfO2A9YQjRx6BAgAEAo");
-
-        countryLists.add(countryList);
-
-
-        Prefrences.setServer_id("touchvpn");
-        Prefrences.setServer_password("true");
-        Prefrences.setRendomserver(true);
-        Prefrences.setserver_Show(true);
-        Prefrences.setdirect_connect(false);
-
-        Prefrences.setUrl_type(true);
-        Prefrences.setUrl_default("https://backend.northghost.com");
-
-        Utils.country_List = countryLists;
+        Utils.country_List = Parameter_Class.countryLists;
         Prefrences.setCountry_list(Utils.country_List);
 
-        Prefrences.set_server_policy("<html>\\r\\n\\r\\n<body>\\r\\n    <div>\\r\\n        <h3 style=\\\"font-family: monospace\\\">Privacy Policy</h3>\\r\\n    </div>\\r\\n    <div class=\\\"col-md-1 col-sm-1\\\"></div>\\r\\n    <div class=\\\"col-md-10 col-sm-10\\\">\\r\\n        <div class=\\\"text-inter\\\">\\r\\n            <p style=\\\"font-family: monospace\\\">When you use Our applications on Android, This Privacy Policy describes the information collected by us and how we use that information. Your privacy is important to us. Sometimes we need information to provide services that you request.\\r\\n            </p>\\r\\n\\r\\n            <h4 style=\\\"font-family: monospace\\\">Personal Information:</h4>\\r\\n            <p style=\\\"font-family: monospace\\\"><b>Take Photos and Videos:</b> This permission allows us to use your device&#8217;s camera to take photos / videos and turn ON/OFF Camera Flash.<br><br>\\r\\n                <b>Full network access:</b> This permission is used to access the device&#8217;s network for certain functions including receiving update notifications or accessing app classification labels.<br><br>\\r\\n                <b>Connect and disconnect from Wi-Fi:</b> This permission is used in settings and notification toolbar in order to connect and disconnect from Wi-Fi.<br><br>\\r\\n                <b>Read Google service configuration:</b> This information is used to acquire advertising ID. Provide users with better advertising service by using such anonymous ID.<br><br>\\r\\n                <b>Expand/collapse status bar:</b> This permission is used for the gesture feature of User System to expand and collapse the status bar.<br><br>\\r\\n                <b>Measure app storage space:</b> This permission is used to acquire the amount of storage space used by an application.<br><br>\\r\\n                <b>Modify system settings:</b> This permission is used in settings, in order to switch or adjust ringtone, vibration and brightness level of the screen.<br><br>\\r\\n                <b>Photos / Media Files:</b> Modify or delete the contents of your Storage.</p><br>\\r\\n            <p style=\\\"font-family: monospace\\\"> <b>You give us To avail services on this app, you are required to provide the following information for better experience.</b><br></br>\\r\\n\\r\\n                <b>(A). Age and Gender:</b> </br>For the purpose of delivery personalized and targeted ads through third party ad network providers if consented by the user.</br>\\r\\n                </br>\\r\\n\\r\\n                <b>All required information you provide will be protect by us, We do not share your personal information(Age & Gender) by anyone. </b></p>\\r\\n\\r\\n\\r\\n\\r\\n            <h4 style=\\\"font-family: monospace\\\">Non- Personal Information :</h4>\\r\\n            <p style=\\\"font-family: monospace\\\">We may collect and use non-personal information in the following circumstances. To have a better understanding in user&#8217;s behaviour, solve problems in products and services, improve our products, services and advertising, we may collect\\r\\n                non-personal information such as installed Other Applications name and package name, the data of instal.<br> We also collect unique device GCM token for Notification purpose. If non-personal information is combined with personal information,\\r\\n                We treat the combined information as personal information for the purposes of this Privacy Policy.<br>\\r\\n\\r\\n                <b>Information we get from your use of our services  :</b> We may collect information about the services that you use and how you use them, such as when you view and interact with our content. We may collect device-specific information.We\\r\\n                will not share that information with third parties. <br>\\r\\n\\r\\n                <b>Unique Application numbers :</b> Certain services include a unique application number. This number and information about your installation (for example, the operating system type and application version number) may be sent to us when\\r\\n                you install or uninstall that service or when that service periodically contacts our servers, such as for automatic updates.</p>\\r\\n\\r\\n            <h4 style=\\\"font-family: monospace\\\">Advertisement in App:</h4>\\r\\n            <p style=\\\"font-family: monospace\\\">We use Google Admob for advertisements in our Applications. There could be errors in the programming and sometime programming errors may cause unwanted side effects. </br>\\r\\n                </br>\\r\\n                <b>Ad Network Privacy Policy :</b>\\r\\n\\r\\n                </br>\\r\\n                <ul>\\r\\n                    <li><a style=\\\"font-family: monospace\\\" href=\\\"https://support.google.com/admob/answer/6128543?hl=en\\\" target=\\\"_blank\\\">ADMOB Privacy</a></br>\\r\\n                    </li>\\r\\n                </ul>\\r\\n\\r\\n                <p style=\\\"font-family: monospace\\\"> We are very concerned about safeguarding the confidentiality of your information Please be aware that no security measures that we take to protect your information is absolutely guaranteed to avoid unauthorized access or use of your Non-Personal\\r\\n                    Information which is impenetrable. We haven't any Intention to Copy or use Others Product use and Access in company&#8217;s Application.<br> We are occasionally update this privacy statement. When we do so, we will also revise the\\r\\n                    \\\"last modified\\\" date of the privacy statement.<br> If any query about this privacy policy do not use our service.<br></br>\\r\\n\\r\\n                    Thank You...</p>\\r\\n\\r\\n                <p style=\\\"font-family: monospace\\\"><b>Last Modified : 27-Dec-2021</b></p>\\r\\n\\r\\n\\r\\n\\r\\n        </div>\\r\\n\\r\\n    </div>\\r\\n    <div class=\\\"col-md-1 col-sm-1\\\" />\\r\\n\\r\\n\\r\\n\\r\\n    </div>\\r\\n\\r\\n</html>");
+        // TODO :  ID PASS
+        Prefrences.setServer_id(Parameter_Class.Server_Id);
+        Prefrences.setServer_password(Parameter_Class.Server_password);
+
+
+        // TODO : URL
+        Prefrences.setUrl_type(Parameter_Class.url_Type);
+        Prefrences.setUrl_default(Parameter_Class.Server_Url_Default);
+
+
+        // TODO : SERVER CONNECTION
+        Prefrences.setRendomserver(Parameter_Class.Server_random);
+        Prefrences.setserver_Show(Parameter_Class.Server_Show);
+        Prefrences.setdirect_connect(Parameter_Class.Server_Direct_Connect);
+
+
+        // TODO : DEFAULT SERVER CONNECT
+        Prefrences.set_server_short(Parameter_Class.Server_code);
+        Prefrences.setserver_name(Parameter_Class.Server_name);
+        Prefrences.setServer_image(Parameter_Class.Server_imageurl);
+
 
         Server_Connection();
     }
 
-    public void Server_Connection() {
+    public static void Server_Connection() {
         if (Prefrences.getserver_Show()) {
             Server_Initialize();
         } else {
@@ -103,9 +95,7 @@ public class MainActivity extends Activity {
         }
     }
 
-
-    public void Server_Initialize() {
-
+    public static void Server_Initialize() {
 
         Server_Key = Prefrences.getServer_id();
         Server_Password = Prefrences.getServer_password();
@@ -116,7 +106,7 @@ public class MainActivity extends Activity {
 
         if (Prefrences.getUrl_type()) {
             clientInfo = ClientInfo.newBuilder()
-                    .addUrls(unknown_url_list)
+                    .addUrls(Parameter_Class.unknown_url_list)
                     .carrierId(Server_Key)
                     .build();
         } else {
@@ -133,7 +123,7 @@ public class MainActivity extends Activity {
         UnifiedSDK.update(transportConfigList, CompletableCallback.EMPTY);
         unifiedSDK = UnifiedSDK.getInstance(clientInfo);
         NotificationConfig notificationConfig = NotificationConfig.newBuilder()
-                .title(getResources().getString(R.string.app_name))
+                .title(context.getResources().getString(R.string.app_name))
                 .channelId(CHANNEL_ID)
                 .build();
         UnifiedSDK.update(notificationConfig);
@@ -141,7 +131,7 @@ public class MainActivity extends Activity {
         LoginToServer();
     }
 
-    public void LoginToServer() {
+    public static void LoginToServer() {
         AuthMethod authMethod = AuthMethod.anonymous();
         UnifiedSDK.getInstance().getBackend().login(authMethod, new com.anchorfree.vpnsdk.callbacks.Callback<User>() {
             @Override
@@ -159,19 +149,19 @@ public class MainActivity extends Activity {
 
     }
 
-    private void createNotificationChannel() {
+    private static void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Server_Master";
             String description = "Server notification";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }
 
-    private void LoginAPi_Token() {
+    private static void LoginAPi_Token() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api-prod.northghost.com/partner/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -201,7 +191,7 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void IntentActivity() {
+    private static void IntentActivity() {
         if (Prefrences.getserver_Show()) {
             if (Prefrences.getdirect_connect()) {
                 AutoVNStart();
@@ -211,25 +201,25 @@ public class MainActivity extends Activity {
         LoadAds();
     }
 
-    private void AutoVNStart() {
+    private static void AutoVNStart() {
         if (Prefrences.getRendomserver()) {
             Utils.setUpCountry();
         }
         ConnectVN();
     }
 
-    private void ConnectVN() {
+    private static void ConnectVN() {
         if (Prefrences.getisServerConnect()) {
-            Utils.server_Start = true;
+            Parameter_Class.server_Start = true;
             status("connected");
         } else {
             prepareVpn();
         }
     }
 
-    public void status(String status) {
+    public static void status(String status) {
         if (status.equals("connect")) {
-            Utils.server_Start = false;
+            Parameter_Class.server_Start = false;
             Prefrences.setisServerConnect(false);
         } else if (status.equals("connecting")) {
             Prefrences.setisServerConnect(false);
@@ -239,8 +229,7 @@ public class MainActivity extends Activity {
         }
     }
 
-
-    private void LoadAds() {
+    private static void LoadAds() {
 
         if (Prefrences.getserver_Show()) {
             UnifiedSDK.getVpnState(new com.anchorfree.vpnsdk.callbacks.Callback<VPNState>() {
@@ -249,7 +238,7 @@ public class MainActivity extends Activity {
                     if (vpnState == VPNState.CONNECTED) {
 
                     } else {
-                        Utils.server_Start = false;
+                        Parameter_Class.server_Start = false;
                         Prefrences.setisServerConnect(false);
                     }
 
@@ -258,7 +247,7 @@ public class MainActivity extends Activity {
 
                 @Override
                 public void failure(@NonNull VpnException e) {
-                    Utils.server_Start = false;
+                    Parameter_Class.server_Start = false;
                     Prefrences.setisServerConnect(false);
                     Pass_Activity();
 
@@ -269,35 +258,33 @@ public class MainActivity extends Activity {
         }
     }
 
-
-
-    private void prepareVpn() {
-        if (!Utils.server_Start) {
-            Utils.isConnectingToInternet(MainActivity.this, new Utils.OnCheckNet() {
+    private static void prepareVpn() {
+        if (!Parameter_Class.server_Start) {
+            Utils.isConnectingToInternet(context, new Utils.OnCheckNet() {
                 @Override
                 public void OnCheckNet(boolean b) {
                     if (b) {
 
-                        Intent intent = VpnService.prepare(MainActivity.this);
+                        Intent intent = VpnService.prepare(context);
                         if (intent != null) {
-                            startActivityForResult(intent, 1);
+                            context.startActivityForResult(intent, 1);
                         } else {
                             startServer();
                         }
                     } else {
-                        finishAffinity();
+                        intent_pass_interface1.onIntentpass(true);
                     }
                 }
             });
         }
     }
 
-    private void startServer() {
+    private static void startServer() {
         status("connecting");
         Server_Connecting();
     }
 
-    public void Server_Connecting() {
+    public static void Server_Connecting() {
 
         isLoggedIn(new com.anchorfree.vpnsdk.callbacks.Callback<Boolean>() {
             @Override
@@ -321,7 +308,7 @@ public class MainActivity extends Activity {
                         @Override
                         public void complete() {
                             Log.d("MainActivity12", "complete");
-                            Utils.server_Start = true;
+                            Parameter_Class.server_Start = true;
                             status("connected");
                         }
 
@@ -329,7 +316,7 @@ public class MainActivity extends Activity {
                         public void error(@NonNull VpnException e) {
                             Log.d("MainActivity12", "error = " + e.getMessage());
                             status("connect");
-                            Utils.server_Start = false;
+                            Parameter_Class.server_Start = false;
                             if (e.getMessage().contains("TRAFFIC_EXCEED")) {
                                 Set_Limit_size();
                             } else {
@@ -349,17 +336,17 @@ public class MainActivity extends Activity {
 
     }
 
-    public void isLoggedIn(com.anchorfree.vpnsdk.callbacks.Callback<Boolean> callback) {
+    public static void isLoggedIn(com.anchorfree.vpnsdk.callbacks.Callback<Boolean> callback) {
         UnifiedSDK.getInstance().getBackend().isLoggedIn(callback);
     }
 
-    private void Set_Limit_size() {
+    private static void Set_Limit_size() {
         int New_limit_traffic = 1000;
         long total_bytes = New_limit_traffic * 1048576;
         Delete_ApiCall(total_bytes);
     }
 
-    private void Delete_ApiCall(long total_bytes) {
+    private static void Delete_ApiCall(long total_bytes) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api-prod.northghost.com/partner/subscribers/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -384,7 +371,7 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void Add_Trafic_size(long total_bytes) {
+    private static void Add_Trafic_size(long total_bytes) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api-prod.northghost.com/partner/subscribers/")
@@ -406,47 +393,88 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void Pass_Activity() {
+    private static void Pass_Activity() {
 
         if (Prefrences.getisServerConnect()) {
             if (!Prefrences.getserver_Show()) {
                 disconnectFromVnp();
             } else {
-                startActivity(new Intent(MainActivity.this, Start_Activity.class));
-                finish();
+                //startActivity(new Intent(MainActivity.this, Start_Activity.class));
+                //finish();
+                intent_pass_interface1.onIntentpass(true);
             }
         } else {
             if (Prefrences.getserver_Show()) {
-                Intent intent = new Intent(MainActivity.this, Sample_Connection.class);
+                Intent intent = new Intent(context, Sample_Connection.class);
                 intent.putExtra("type_connection", "connection");
-                startActivity(intent);
-                finish();
+                context.startActivity(intent);
+                context.finish();
             } else {
                 if (Prefrences.getisServerConnect()) {
                     disconnectFromVnp();
                 } else {
-                    startActivity(new Intent(MainActivity.this, Start_Activity.class));
-                    finish();
+                    intent_pass_interface1.onIntentpass(true);
+//                    startActivity(new Intent(MainActivity.this, Start_Activity.class));
+//                    finish();
                 }
             }
         }
     }
 
-    public void disconnectFromVnp() {
+    public static void disconnectFromVnp() {
         UnifiedSDK.getInstance().getVPN().stop(TrackingConstants.GprReasons.M_UI, new CompletableCallback() {
             @Override
             public void complete() {
-                Utils.server_Start = false;
+                Parameter_Class.server_Start = false;
                 Prefrences.setisServerConnect(false);
 
-                startActivity(new Intent(MainActivity.this, Start_Activity.class));
-                finish();
+                intent_pass_interface1.onIntentpass(true);
+//                startActivity(new Intent(MainActivity.this, Start_Activity.class));
+//                finish();
             }
 
             @Override
             public void error(@NonNull VpnException e) {
             }
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            Utils.isConnectingToInternet(MainActivity.this, new Utils.OnCheckNet() {
+                @Override
+                public void OnCheckNet(boolean b) {
+                    if (b) {
+                        startServer();
+                    } else {
+                        intent_pass_interface1.onIntentpass(true);
+                    }
+                }
+            });
+
+        } else {
+            intent_pass_interface1.onIntentpass(true);
+//            if (!Preference.getComing_soon()) {
+//                LoadNativeAds();
+//            }
+//            Ads_SplashAppOpen.Splash_OpenAppAds_Load( SplashActivity.this, new Ads_SplashAppOpen.OnFinishAds() {
+//                @Override
+//                public void onFinishAds(boolean b) {
+//                    Main_Intent_Pass();
+//                }
+//            } );
+//            Toast.makeText(Splash_Screen.this, "Permission Deny !! ", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

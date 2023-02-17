@@ -13,8 +13,11 @@ import android.widget.Toast;
 
 import com.securedemo.myapplication.R;
 import com.securedemo.myapplication.Start_Activity;
+import com.securedemo.myapplication.utils.Parameter_Class;
 import com.securedemo.myapplication.utils.Prefrences;
 import com.securedemo.myapplication.utils.Utils;
+
+import static com.securedemo.myapplication.MainActivity.intent_pass_interface1;
 
 public class Privacy_Screen extends Activity {
 
@@ -34,12 +37,12 @@ public class Privacy_Screen extends Activity {
             public void OnCheckNet(boolean b) {
                 if (b) {
                     try {
-                        if (Prefrences.getserver_policy() != null) {
+                        if (Parameter_Class.Privacy_policy != null) {
                             textView.setMovementMethod(LinkMovementMethod.getInstance());
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                textView.setText(Html.fromHtml(Prefrences.getserver_policy(), Html.FROM_HTML_MODE_COMPACT));
+                                textView.setText(Html.fromHtml(Parameter_Class.Privacy_policy, Html.FROM_HTML_MODE_COMPACT));
                             } else {
-                                textView.setText(Html.fromHtml(Prefrences.getserver_policy()));
+                                textView.setText(Html.fromHtml(Parameter_Class.Privacy_policy));
                             }
 
                         } else {
@@ -59,8 +62,7 @@ public class Privacy_Screen extends Activity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Privacy_Screen.this, Start_Activity.class));
-                finish();
+                intent_pass_interface1.onIntentpass(true);
             }
         });
     }

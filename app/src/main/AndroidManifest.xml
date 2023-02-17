@@ -3,7 +3,7 @@
     package="com.securedemo.myapplication">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".utils.MyApp_Controller"
@@ -12,31 +12,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.MyVpnDemoRG">
-
-        <activity android:name=".connection.Sample_Connection"/>
-        <activity android:name=".connection.Privacy_Screen"/>
-        <activity android:name=".Start_Activity"/>
-        <activity android:name=".MainActivity"
+        android:theme="@style/Theme.MyVpnDemoRG"
+        android:usesCleartextTraffic="true">
+       <!-- <activity android:name=".Interface_activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>-->
+        <activity android:name=".connection.Sample_Connection" />
+        <activity android:name=".connection.Privacy_Screen" />
+        <activity android:name=".Start_Activity" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
         </activity>
-
-        <service
-            android:name="com.anchorfree.vpnsdk.vpnservice.AFVpnService"
-            android:enabled="@bool/vpn_process_enabled"
-            android:permission="android.permission.BIND_VPN_SERVICE"
-            android:process="@string/vpn_process_name"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.net.VpnService" />
-            </intent-filter>
-        </service>
-
     </application>
 
 </manifest>
