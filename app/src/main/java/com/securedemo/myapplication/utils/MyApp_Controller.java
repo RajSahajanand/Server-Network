@@ -30,6 +30,8 @@ public class MyApp_Controller extends Application {
         super.onCreate();
         ourInstance = this;
         SetAppOpenads();
+
+
     }
 
     private void SetAppOpenads() {
