@@ -8,6 +8,12 @@ public class CountryList {
     public String code;
     public String cuntryimages;
 
+    public CountryList(String name,String code,String cuntryimages) {
+        this.name =name;
+        this.code =code;
+        this.cuntryimages =cuntryimages;
+    }
+
     public String getName() {
         return name;
     }
